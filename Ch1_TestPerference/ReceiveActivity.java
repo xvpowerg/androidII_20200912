@@ -23,10 +23,18 @@ public class ReceiveActivity extends AppCompatActivity {
 
        Intent receiveIntent =  getIntent();
         String account = receiveIntent.getStringExtra(getString(R.string.account_key));
-        String passKey = receiveIntent.getStringExtra(getString(R.string.pass_key));
+        String pass = receiveIntent.getStringExtra(getString(R.string.pass_key));
         boolean saveCheck =  receiveIntent.getBooleanExtra(getString(R.string.save_key),
                 false);
+        if (saveCheck){
+           SharedPreferences.Editor editor =  sp.edit();
+            editor.putString(getString(R.string.account_key),account);
+            editor.putString(getString(R.string.pass_key),pass);
+
+        }else{
+
+        }
        TextView msgTxt =  findViewById(R.id.msgTxt);
-        msgTxt.setText(account+":"+passKey+":"+saveCheck);
+        msgTxt.setText(account+":"+pass+":"+saveCheck);
     }
 }
