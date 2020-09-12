@@ -1,4 +1,4 @@
-# Ch1_TestPerference
+# Ch1_TestPreference
 練習使用Perference儲存帳號密碼
 ## 使用SharedPreferences 儲存資料步驟
 + 取得SharedPreferences,可透過方法getSharedPreferences，此方法提供兩個參數
