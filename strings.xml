@@ -1,6 +1,0 @@
-<resources>
-    <string name="app_name">Ch1_TestPerference</string>
-    <string name="account_key">account</string>
-    <string name="pass_key">password</string>
-    <string name="save_key">saveCheck</string>
-</resources>
