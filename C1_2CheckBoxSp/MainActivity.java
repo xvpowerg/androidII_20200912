@@ -77,6 +77,15 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    private void test2Save(SharedPreferences sp){
+       SharedPreferences.Editor editor =  sp.edit();
+        for (int i =0; i <checkBoxArray.length;i++){
+            editor.putBoolean(CHECK_BOX_SP_KEY+(i+1),
+                    checkBoxArray[i].isChecked());
+        }
+        editor.commit();
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -85,7 +94,9 @@ public class MainActivity extends AppCompatActivity {
                         Context.MODE_PRIVATE);
         initTest2CheckBoxArray();
          Button saveBtn =  findViewById(R.id.saveBtn);
-
+        saveBtn.setOnClickListener(v->{
+            test2Save(sp);
+        });
         //saveBtn.setOnClickListener(v-> test1_save(sp));
     }
 
