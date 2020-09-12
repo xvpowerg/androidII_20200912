@@ -1,6 +1,4 @@
-# 建立MyPreferenceFragment
-
-
+# 建立PreferenceFragment
 
 + 設定gradle 加入PreferenceFragmentCompat 的 lib
 ```txt
