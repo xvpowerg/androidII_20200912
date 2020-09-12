@@ -26,14 +26,16 @@ public class ReceiveActivity extends AppCompatActivity {
         String pass = receiveIntent.getStringExtra(getString(R.string.pass_key));
         boolean saveCheck =  receiveIntent.getBooleanExtra(getString(R.string.save_key),
                 false);
+        //注意 Editor是一筆交易所以完畢後必須呼叫commit()
+        SharedPreferences.Editor editor =  sp.edit();
         if (saveCheck){
-            //注意 Editor是一筆交易所以完畢後必須呼叫commit()
-           SharedPreferences.Editor editor =  sp.edit();
             editor.putString(getString(R.string.account_key),account);
             editor.putString(getString(R.string.pass_key),pass);
             editor.commit();
         }else{
-
+            editor.putString(getString(R.string.account_key),"");
+            editor.putString(getString(R.string.pass_key),"");
+            editor.commit();
         }
        TextView msgTxt =  findViewById(R.id.msgTxt);
         msgTxt.setText(account+":"+pass+":"+saveCheck);
