@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <EditTextPreference
+        android:defaultValue=""
+        android:key="msg_key"
+        android:title="請輸入訊息"
+    />
+
+    <PreferenceCategory android:title="啟動開發者模式">
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="debug_key"
+            android:title="開啟Debug模式"
+            />
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="close_audio_key"
+            android:title="關閉系統音效"
+            />
+     </PreferenceCategory>
+    <SwitchPreference android:defaultValue="false"
+        android:key="font_size_25"
+        android:title="字體變大"/>
+</PreferenceScreen>
