@@ -24,6 +24,8 @@ public class MainActivity extends AppCompatActivity {
              String accountStr = accountText.getText().toString();
              String passwordStr = passwordText.getText().toString();
              Intent toActivityIntent = new Intent(this,ReceiveActivity.class);
+             toActivityIntent.putExtra(getString(R.string.account_key),accountStr);
+             toActivityIntent.putExtra(getString(R.string.pass_key),passwordStr);
              startActivity(toActivityIntent);
          });
     }
