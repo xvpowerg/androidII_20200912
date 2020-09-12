@@ -14,7 +14,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText accountText;
     private EditText passwordText;
     private SharedPreferences sp;
-
+    private  CheckBox saveBox;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,8 +23,7 @@ public class MainActivity extends AppCompatActivity {
          passwordText = findViewById(R.id.password);
         Button submitBtn = findViewById(R.id.submitBtn);
         sp = getSharedPreferences(getString(R.string.preference_key), Context.MODE_PRIVATE);
-
-        CheckBox saveBox =  findViewById(R.id.saveCheck);
+        saveBox =  findViewById(R.id.saveCheck);
          submitBtn.setOnClickListener(v->{
              String accountStr = accountText.getText().toString();
              String passwordStr = passwordText.getText().toString();
@@ -42,7 +41,9 @@ public class MainActivity extends AppCompatActivity {
         super.onStart();
         String account = sp.getString(getString(R.string.account_key),"");
         String passkey = sp.getString(getString(R.string.pass_key),"");
+        boolean saveCheck =    sp.getBoolean(getString(R.string.save_key),false);
         accountText.setText(account);
         passwordText.setText(passkey);
+        saveBox.setChecked(saveCheck);
     }
 }

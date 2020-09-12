@@ -31,10 +31,12 @@ public class ReceiveActivity extends AppCompatActivity {
         if (saveCheck){
             editor.putString(getString(R.string.account_key),account);
             editor.putString(getString(R.string.pass_key),pass);
+            editor.putBoolean(getString(R.string.save_key),saveCheck);
             editor.commit();
         }else{
             editor.putString(getString(R.string.account_key),"");
             editor.putString(getString(R.string.pass_key),"");
+            editor.putBoolean(getString(R.string.save_key),false);
             editor.commit();
         }
        TextView msgTxt =  findViewById(R.id.msgTxt);
