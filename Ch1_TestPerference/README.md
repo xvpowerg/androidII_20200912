@@ -13,7 +13,7 @@
  ```
 + 取得SharedPreferences.Editor 才可編輯資料
   + 可透過SharedPreferences物件的edit()方法取得
-  + 呼叫putxxx()可將資料存於相對應的xml中
+  + 呼叫putxxx()可將資料存於相對應的xml中 xxx指的是某一種類型
   + 記得最後必須呼叫commit()
 案例如下:
 ```java
@@ -23,8 +23,8 @@
             editor.commit();
 ```
 ## 使用SharedPreferences 讀取資料步驟
-+ 取得SharedPreferences,可透過方法getSharedPreferences，此方法提供兩個參數
-+ 使用SharedPreferences的getxxx方法取值
++ 取得SharedPreferences,可透過方法getSharedPreferences，
++ 使用SharedPreferences物件的getxxx方法取值 xxx指的是某一種類型
 案例如下:
 ```java
     String account = sp.getString(getString(R.string.account_key),"");
