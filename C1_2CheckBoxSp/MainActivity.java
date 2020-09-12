@@ -5,23 +5,26 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.CheckBox;
+
+import java.lang.reflect.Field;
 
 public class MainActivity extends AppCompatActivity {
     private SharedPreferences sp;
     public static final String CHECK_BOX_SP_KEY = "checkBox";
 //test2 start
-    private Integer[] checkBoxIds={
-            R.id.checkBox1,
-            R.id.checkBox2,
-            R.id.checkBox3,
-            R.id.checkBox4,
-            R.id.checkBox5,
-            R.id.checkBox6
-    };
+//    private Integer[] checkBoxIds={
+//            R.id.checkBox1,
+//            R.id.checkBox2,
+//            R.id.checkBox3,
+//            R.id.checkBox4,
+//            R.id.checkBox5,
+//            R.id.checkBox6
+//    };
     private CheckBox[] checkBoxArray =
-                        new CheckBox[checkBoxIds.length];
+                        new CheckBox[6];
     //test2 end
 
     private void test1Display(SharedPreferences sp){
@@ -64,10 +67,21 @@ public class MainActivity extends AppCompatActivity {
         editor.commit();
     }
 
-    private void initTest2CheckBoxArray(){
-            for (int i= 0;i < checkBoxIds.length;i++){
-                checkBoxArray[i] = findViewById(checkBoxIds[i]);
-            }
+//    private void initTest2CheckBoxArray(){
+//        for (int i= 0;i < checkBoxIds.length;i++){
+//            checkBoxArray[i] = findViewById(checkBoxIds[i]);
+//        }
+//    }
+
+    private void initTest3CheckBoxArray() throws NoSuchFieldException, IllegalAccessException {
+
+        for (int i =1; i<=6;i++){
+            Field field = R.id.class.getField(CHECK_BOX_SP_KEY+i);
+             int id =  field.getInt(R.id.class);
+             checkBoxArray[i-1] = findViewById(id);
+        }
+
+
     }
 
     private void test2Display(SharedPreferences sp){
@@ -92,8 +106,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
          sp = getSharedPreferences("test_checkbox",
                         Context.MODE_PRIVATE);
-        initTest2CheckBoxArray();
-         Button saveBtn =  findViewById(R.id.saveBtn);
+        try {
+            initTest3CheckBoxArray();
+        } catch (NoSuchFieldException|IllegalAccessException e) {
+            Log.d("Howard","Erro:"+e);
+        }
+        Button saveBtn =  findViewById(R.id.saveBtn);
         saveBtn.setOnClickListener(v->{
             test2Save(sp);
         });
