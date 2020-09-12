@@ -5,7 +5,7 @@
    + Preferences 所存的xml名稱
      + 如果此xml不存在 系統會自動建立完畢後讀取
      + 如果此xml存在系統會讀取
-+ 存取限制 通常使用 Context.MODE_PRIVATE 表示只有目前應用程式能讀取
+   + 存取限制 通常使用 Context.MODE_PRIVATE 表示只有目前應用程式能讀取
  案例如下:
  ```java
   SharedPreferences sp =
