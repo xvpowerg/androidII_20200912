@@ -64,6 +64,7 @@ public class HomeFragment  extends Fragment {
 }
 ```
 + 透過SharedPreferences取得儲存的數值如下
+` sp.getxxx 當中的key會對應到xml當中的 android:key 的數值`
 ```java
 
     @Override
