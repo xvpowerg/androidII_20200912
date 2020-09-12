@@ -19,7 +19,7 @@ public class ReceiveActivity extends AppCompatActivity {
         //如果此xml不存在 系統會自動建立完畢後讀取
         //如果此xml存在系統會讀取
         SharedPreferences sp =
-                getSharedPreferences("test_login", Context.MODE_PRIVATE);
+                getSharedPreferences(getString(R.string.preference_key), Context.MODE_PRIVATE);
 
        Intent receiveIntent =  getIntent();
         String account = receiveIntent.getStringExtra(getString(R.string.account_key));
@@ -27,10 +27,11 @@ public class ReceiveActivity extends AppCompatActivity {
         boolean saveCheck =  receiveIntent.getBooleanExtra(getString(R.string.save_key),
                 false);
         if (saveCheck){
+            //注意 Editor是一筆交易所以完畢後必須呼叫commit()
            SharedPreferences.Editor editor =  sp.edit();
             editor.putString(getString(R.string.account_key),account);
             editor.putString(getString(R.string.pass_key),pass);
-
+            editor.commit();
         }else{
 
         }
