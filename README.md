@@ -50,3 +50,29 @@ public class MyPreferenceFragment  extends PreferenceFragmentCompat {
     }
 }
 ```
+# 取得Preference設定好的數值
++ 可以在一般Fragment 呼叫 PreferenceManager.getDefaultSharedPreferences()方法取的 SharedPreferences
+```java
+public class HomeFragment  extends Fragment {
+      .....
+    private SharedPreferences sp;
+    @Override
+    public void onStart() {
+      .......
+        sp = PreferenceManager.getDefaultSharedPreferences(getActivity());
+    }
+}
+```
++ 透過SharedPreferences取得儲存的數值如下
+```java
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        String msg = sp.getString("msg_key","");
+        msgView.setText(msg);
+
+        //msgView.setTextSize();
+    }
+
+```
