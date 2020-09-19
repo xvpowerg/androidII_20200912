@@ -23,9 +23,14 @@ public class MainActivity extends AppCompatActivity {
         try {
 //            Student st = JsonTools.jsonStringToStudent(json);
 //            Log.d("Howard","st:"+st);
-           List<Student> list = JsonTools.jsonStringToStudentList(json);
-           Log.d("Howard","List:"+list);
-        } catch (JSONException e) {
+//           List<Student> list = JsonTools.jsonStringToStudentList(json);
+//           Log.d("Howard","List:"+list);
+            //測試Gson
+//            Student st = JsonTools.jsonStringToStudentByGson(json);
+//          Log.d("Howard","st:"+st);
+         List<Student> list = JsonTools.jsonStringToStudentListByGson(json);
+         Log.d("Howard","List:"+list);
+        } catch (Exception e) {
             Log.e("Howard","JSONException:"+e);
         }
         //Log.d("Howard","json:"+json);
