@@ -49,13 +49,33 @@ public class MainActivity extends AppCompatActivity {
             readFile(getFilesDir());
 
         }
+    private void createCache(View view){
+        //暫存
+            File cacheDir = getCacheDir();
+            Log.d("Howard","cacheDir:"+cacheDir.getAbsolutePath());
+            File file = new File(cacheDir.getAbsolutePath(),fileName);
+            try(FileOutputStream fout = new FileOutputStream(file);
+                OutputStreamWriter osw = new OutputStreamWriter(fout);){
+                String msg = textValueEdit.getText().toString();
+                osw.write(msg);
+            }catch (IOException ex){
+            Log.e("Howard","IOException:"+ex);
+            }
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
             Button btn =  findViewById(R.id.createFileBtn);
+        Button btn2 =  findViewById(R.id.createCacheBtn);
         textValueEdit = findViewById(R.id.textValueEdit);
         btn.setOnClickListener(this::createFile);
+        btn2.setOnClickListener(this::createCache);
+
     }
+
+
+
 }
