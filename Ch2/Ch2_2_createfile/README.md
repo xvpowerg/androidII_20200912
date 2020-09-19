@@ -11,7 +11,16 @@ FileOutputStream fOut =openFileOutput(fileName,MODE_PRIVATE);
 ```java
 getFilesDir()
 ```
-目錄格式約如下
+完整路徑約如下
 ```txt
 /data/user/0/套件名稱/files
+```
+## 寫入Cache的方式如下
+透過 getCacheDir() 取得cache目錄 如下範例
+```java
+File file = new File(cacheDir.getAbsolutePath(),fileName);
+```
+完整路徑約如下
+```txt
+/data/user/0/套件名稱/cache
 ```
