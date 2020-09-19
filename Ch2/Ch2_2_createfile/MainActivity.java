@@ -61,6 +61,23 @@ public class MainActivity extends AppCompatActivity {
             }catch (IOException ex){
             Log.e("Howard","IOException:"+ex);
             }
+            readFile(cacheDir);
+    }
+
+    private void createExterFile(View view){
+            File fileDir = getExternalFilesDir(null);
+            Log.d("Howard","ExternalDir:"
+                    +fileDir.getAbsolutePath());
+            File file = new File(fileDir,fileName);
+            try(FileOutputStream fOut = new FileOutputStream(file);
+            OutputStreamWriter osw = new OutputStreamWriter(fOut)){
+                String msg = textValueEdit.getText().toString();
+                osw.write(msg);
+            }catch (IOException ex){
+                Log.e("Howard","CreateFile",ex);
+            }
+        readFile(fileDir);
+
     }
 
 
@@ -70,9 +87,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
             Button btn =  findViewById(R.id.createFileBtn);
         Button btn2 =  findViewById(R.id.createCacheBtn);
+        Button btn3 =  findViewById(R.id.createCacheBtn);
         textValueEdit = findViewById(R.id.textValueEdit);
         btn.setOnClickListener(this::createFile);
         btn2.setOnClickListener(this::createCache);
+        btn3.setOnClickListener(this::createExterFile);
 
     }
 
