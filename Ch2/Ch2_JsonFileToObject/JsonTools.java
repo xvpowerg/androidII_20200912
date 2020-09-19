@@ -65,4 +65,12 @@ public class JsonTools {
          }
         return arrayList;
     }
+
+    public static List<Student> jsonStringToStudentListByGson(String json){
+            Gson gson = new GsonBuilder().create();
+            List<Student> stList = gson.fromJson(json,
+                    ArrayList.class);
+        return stList;
+    }
+
 }
