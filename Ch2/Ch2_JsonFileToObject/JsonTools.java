@@ -2,6 +2,9 @@ package tw.com.xvpower.ch2_jsonfiletoobject;
 
 import android.util.Log;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -28,6 +31,13 @@ public class JsonTools {
         }
         st.setName(name);
         st.setExam(exams);
+        return st;
+    }
+
+
+    public static  Student jsonStringToStudentByGson(String json){
+        Gson gson  = new GsonBuilder().create();
+         Student st =  gson.fromJson(json,Student.class);
         return st;
     }
 
