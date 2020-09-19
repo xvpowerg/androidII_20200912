@@ -8,6 +8,7 @@ import android.util.Log;
 import org.json.JSONException;
 
 import java.io.InputStream;
+import java.util.List;
 
 import tw.com.xvpower.ch2_jsonfiletoobject.bean.Student;
 
@@ -17,11 +18,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-         InputStream ios= getResources().openRawResource(R.raw.student);
+         InputStream ios= getResources().openRawResource(R.raw.student_list);
          String json =  ReadJsonByRaw.readJsonFile(ios);
         try {
-            Student st = JsonTools.jsonStringToStudent(json);
-            Log.d("Howard","st:"+st);
+//            Student st = JsonTools.jsonStringToStudent(json);
+//            Log.d("Howard","st:"+st);
+           List<Student> list = JsonTools.jsonStringToStudentList(json);
+           Log.d("Howard","List:"+list);
         } catch (JSONException e) {
             Log.e("Howard","JSONException:"+e);
         }
