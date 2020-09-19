@@ -8,12 +8,30 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 
 public class MainActivity extends AppCompatActivity {
     private String fileName = "myfile.txt";
+    private void readFile(File dirc){
+        Log.d("Howard","Dir:"+dirc.getAbsolutePath());
+        File txtFile = new File(dirc.getAbsolutePath(),fileName);
+        StringBuilder  sb = new StringBuilder();
+        try(FileReader fr = new FileReader(txtFile)){
+            char[] buffr = new char[128];
+            int index =-1;
+            while((index = fr.read(buffr))!=-1 ){
+                sb.append(buffr,0,index);
+            }
+
+        }catch(IOException ex){
+                Log.e("Howard","IOException:"+ex);
+        }
+        Log.d("Howard","Read:"+sb);
+    }
         private void createFile(View view){
                try(FileOutputStream fout =
                            openFileOutput(fileName,MODE_PRIVATE );
@@ -24,6 +42,9 @@ public class MainActivity extends AppCompatActivity {
                }catch(IOException ex){
                    Log.e("Howard","createFile Ex:"+ex);
             }
+
+            readFile(getFilesDir());
+
         }
 
     @Override
