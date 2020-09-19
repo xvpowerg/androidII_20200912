@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import java.io.File;
@@ -16,6 +17,7 @@ import java.io.OutputStreamWriter;
 
 public class MainActivity extends AppCompatActivity {
     private String fileName = "myfile.txt";
+    private EditText textValueEdit;
     private void readFile(File dirc){
         Log.d("Howard","Dir:"+dirc.getAbsolutePath());
         File txtFile = new File(dirc.getAbsolutePath(),fileName);
@@ -36,7 +38,8 @@ public class MainActivity extends AppCompatActivity {
                try(FileOutputStream fout =
                            openFileOutput(fileName,MODE_PRIVATE );
                    OutputStreamWriter osw = new OutputStreamWriter(fout)){
-                   osw.write("測試文字!!!");
+                   String msg = textValueEdit.getText().toString();
+                   osw.write(msg);
                    Toast.makeText(this,"File Save",
                            Toast.LENGTH_SHORT).show();
                }catch(IOException ex){
@@ -52,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
             Button btn =  findViewById(R.id.createFileBtn);
+        textValueEdit = findViewById(R.id.textValueEdit);
         btn.setOnClickListener(this::createFile);
     }
 }
