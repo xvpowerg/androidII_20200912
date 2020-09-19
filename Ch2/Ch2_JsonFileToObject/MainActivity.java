@@ -9,6 +9,8 @@ import org.json.JSONException;
 
 import java.io.InputStream;
 
+import tw.com.xvpower.ch2_jsonfiletoobject.bean.Student;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -18,7 +20,8 @@ public class MainActivity extends AppCompatActivity {
          InputStream ios= getResources().openRawResource(R.raw.student);
          String json =  ReadJsonByRaw.readJsonFile(ios);
         try {
-            JsonTools.jsonStringToStudent(json);
+            Student st = JsonTools.jsonStringToStudent(json);
+            Log.d("Howard","st:"+st);
         } catch (JSONException e) {
             Log.e("Howard","JSONException:"+e);
         }
