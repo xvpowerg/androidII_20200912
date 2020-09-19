@@ -6,6 +6,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import tw.com.xvpower.ch2_jsonfiletoobject.bean.Exam;
 import tw.com.xvpower.ch2_jsonfiletoobject.bean.Student;
 
@@ -26,5 +29,30 @@ public class JsonTools {
         st.setName(name);
         st.setExam(exams);
         return st;
+    }
+
+    public static List<Student> jsonStringToStudentList(String json)
+                        throws JSONException {
+        List<Student> arrayList = new ArrayList<>();
+        JSONArray jsonArray = new  JSONArray(json);
+         for (int i =0;i<jsonArray.length();i++){
+             JSONObject jobj =  jsonArray.getJSONObject(i);
+             String name = jobj.getString("name");
+             JSONArray examArray = jobj.getJSONArray("exam");
+
+             Exam[] exams = new Exam[examArray.length()];
+                for (int k =0; k <examArray.length();k++){
+                     JSONObject examJObj=  examArray.getJSONObject(k);
+                    String subject = examJObj.getString("subject");
+                    int score = examJObj.getInt("score");
+                    exams[k] = new Exam(subject,score);
+                }
+
+             Student st = new Student();
+             st.setName(name);
+             st.setExam(exams);
+             arrayList.add(st);
+         }
+        return arrayList;
     }
 }
