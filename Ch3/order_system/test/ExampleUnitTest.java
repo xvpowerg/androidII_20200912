@@ -1,5 +1,7 @@
 package tw.com.xvpower.ch2_3_ordersystem;
 
+import com.google.gson.reflect.TypeToken;
+
 import org.junit.Test;
 
 import java.io.File;
@@ -38,6 +40,10 @@ public class ExampleUnitTest {
         JsonTools.createJson(file,json);
         String readJson = JsonTools.readJson(file);
         System.out.println("read:"+readJson);
+
+        TypeToken<Order> token = new TypeToken<Order>(){};
+        Order order =  JsonTools.jsonToObj(readJson,token);
+        System.out.println("Order:"+order);
       assertNotNull(json);
     }
 }
