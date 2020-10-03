@@ -28,6 +28,7 @@ import tw.com.xvpower.ch2_3_ordersystem.view.MyEditViewHolder;
 public class EditOrderActivity extends AppCompatActivity {
     private ArrayList<MyEditViewHolder> editViewList = new ArrayList<>();
     private File jsonFileDir;
+    private EditText titleEdit;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +41,7 @@ public class EditOrderActivity extends AppCompatActivity {
 
         FloatingActionButton fb =   findViewById(R.id.fab);
          LinearLayout pGroup =  findViewById(R.id.productGroup);
+        titleEdit = findViewById(R.id.orderTitle);
         fb.setOnClickListener(v->{
             LinearLayout linearLayout = new LinearLayout(this);
             linearLayout.setOrientation(LinearLayout.HORIZONTAL);
@@ -73,6 +75,8 @@ public class EditOrderActivity extends AppCompatActivity {
                 //顯示 所有輸入的品名 與 金額
                 //Log.d("Howard","save");
                 Order order = new Order();
+                String title = titleEdit.getText().toString();
+                order.setTitle(title);
                 for (MyEditViewHolder vh : editViewList){
                     order.appendProducts(vh.toProduct());
                 }
