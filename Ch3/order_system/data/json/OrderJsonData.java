@@ -43,6 +43,14 @@ public class OrderJsonData  implements OrderDao {
 
     @Override
     public List<Order> queryOrders() {
-        return null;
+
+        String json = JsonTools.readJson(jsonFile);
+        ArrayList<Order> list = new ArrayList<>();
+        if (json == null ||json.isEmpty()){
+            return list;
+        }
+        TypeToken<ArrayList<Order>> typeToken = new TypeToken<ArrayList<Order>>(){};
+         list =  JsonTools.jsonToObj(json,typeToken);
+        return list;
     }
 }
