@@ -45,4 +45,10 @@ public class JsonTools {
        return json;
     }
 
+    public static <T> T jsonToObj(String json,TypeToken<T> token){
+        Gson gson = new GsonBuilder().create();
+        Type type = token.getType();
+        T obj = gson.fromJson(json,type);
+        return obj;
+    }
 }
