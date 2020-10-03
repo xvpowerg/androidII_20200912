@@ -8,7 +8,9 @@ import java.io.File;
 
 import tw.com.xvpower.ch2_3_ordersystem.bean.Order;
 import tw.com.xvpower.ch2_3_ordersystem.bean.Product;
+import tw.com.xvpower.ch2_3_ordersystem.data.OrderDao;
 import tw.com.xvpower.ch2_3_ordersystem.data.json.JsonTools;
+import tw.com.xvpower.ch2_3_ordersystem.data.json.OrderJsonData;
 
 import static org.junit.Assert.*;
 
@@ -46,4 +48,40 @@ public class ExampleUnitTest {
         System.out.println("Order:"+order);
       assertNotNull(json);
     }
+    @Test
+    public void testCreateOrder(){
+        String path = "C:\\Users\\xvpow\\Desktop\\Ch3\\order_system\\data";
+        File jsonFile = new File(path);
+        OrderDao odao = new OrderJsonData(jsonFile);
+        Order o1 = new Order();
+        o1.setTitle("李老闆");
+        Product p1 = new Product();
+        p1.setName("A1");
+        p1.setPrice(100);
+        Product p2 = new Product();
+        p2.setName("A2");
+        p2.setPrice(500);
+        Product p3 = new Product();
+        p3.setName("A3");
+        p3.setPrice(250);
+        o1.appendProducts(p1);
+        o1.appendProducts(p2);
+        o1.appendProducts(p3);
+        o1.setOrderId(120);
+        odao.createOrder(o1);
+//
+//        Order o2= new Order();
+//        o2.setTitle("張老闆");
+//        Product p2_1 = new Product();
+//        p2_1.setName("A1");
+//        p2_1.setPrice(100);
+//        Product p2_2 = new Product();
+//        p2_2.setName("A2");
+//        p2_2.setPrice(500);
+//
+//        o2.appendProducts(p2_1);
+//        o2.appendProducts(p2_2);
+//        odao.createOrder(o2);
+    }
+
 }
