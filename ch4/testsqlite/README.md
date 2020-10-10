@@ -11,4 +11,5 @@ public class DBHelper extends SQLiteOpenHelper {
 
 * onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion)   當Version變動時呼叫
 
-
+#  SQLiteDatabase 常用方法
+* insert 可新增 並回傳id
