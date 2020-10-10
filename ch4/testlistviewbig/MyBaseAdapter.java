@@ -1,5 +1,6 @@
 package tw.com.xvpower.testlistviewbig;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,17 +31,40 @@ public class MyBaseAdapter  extends BaseAdapter {
     public long getItemId(int position) {
         return position;
     }
-
+    //避免再次findViewById
+    private class ViewHolder{
+        TextView t1;
+        TextView t2;
+        TextView t3;
+        ImageView imageView;
+    }
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-
-     View layout =   LayoutInflater.from(parent.getContext()).
-                inflate(R.layout.list_layout,parent,false);
-       TextView t1= layout.findViewById(R.id.textView1);
-       TextView t2= layout.findViewById(R.id.textView2);
-       TextView t3=  layout.findViewById(R.id.textView3);
-       ImageView imageView =  layout.findViewById(R.id.imageView);
-         TestData td = getItem(position);
+        View layout =null;
+        TextView t1,t2,t3;
+        ImageView imageView;
+        if (convertView != null){
+            layout = convertView;
+            ViewHolder vh = (ViewHolder)convertView.getTag();
+            t1 = vh.t1;
+            t2 = vh.t2;
+            t3 = vh.t3;
+            imageView = vh.imageView;
+        }else{
+            layout =   LayoutInflater.from(parent.getContext()).
+                    inflate(R.layout.list_layout,parent,false);
+             t1= layout.findViewById(R.id.textView1);
+             t2= layout.findViewById(R.id.textView2);
+             t3=  layout.findViewById(R.id.textView3);
+             imageView =  layout.findViewById(R.id.imageView);
+            ViewHolder vh = new ViewHolder();
+            vh.t1 = t1;
+            vh.t2 = t2;
+            vh.t3 = t3;
+            vh.imageView = imageView;
+            layout.setTag(vh);
+        }
+        TestData td = getItem(position);
         t1.setText(td.getText1());
         t2.setText(td.getText2());
         t3.setText(td.getText3());
