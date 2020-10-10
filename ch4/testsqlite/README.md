@@ -9,6 +9,6 @@ public class DBHelper extends SQLiteOpenHelper {
 ```
 * onCreate(SQLiteDatabase db) 當我資料庫沒被建立時會執行onCreate
 
-
+* onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion)   當Version變動時呼叫
 
 
