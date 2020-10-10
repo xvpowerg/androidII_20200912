@@ -13,3 +13,16 @@ public class DBHelper extends SQLiteOpenHelper {
 
 #  SQLiteDatabase 常用方法
 * insert 可新增 並回傳id
+* rawQuery 可使用SQL查詢 回傳為Cursor
+```java
+ String sql="SELECT * FROM "+TABLE_NAME;
+        Cursor cursor =  db.rawQuery(sql,null);
+        while(cursor.moveToNext()){
+            int id = cursor.getInt(0);
+            String name = cursor.getString(1);
+            int price = cursor.getInt(2);
+            Book book = new Book(id,name,price);
+            list.add(book);
+        }
+
+```
