@@ -38,8 +38,12 @@ public class MainActivity extends AppCompatActivity {
         FloatingActionButton fab = findViewById(R.id.fab);
         studentAlertEdit = new StudentAlertEdit(this);
         studentAlertEdit.setInsertAction((st)->{
-            Toast.makeText(this,"Insert:"+
-                    st.getName()+":"+st.getScore(),Toast.LENGTH_SHORT).show();
+            int id = dbHelper.getStudentDao().insert(st);
+            if (id > 0){
+                st.setId(id);
+                studentAdapter.addStudent(st);
+                Toast.makeText(this,"新增成功",Toast.LENGTH_SHORT).show();
+            }
         });
          fab.setOnClickListener(v->{
              studentAlertEdit.showInsert();
