@@ -40,6 +40,9 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.MyViewHo
         return stList.size();
     }
 
+    public  void addStudent(Student st){
+        stList.add(st);
+    }
     class MyViewHolder extends RecyclerView.ViewHolder {
         TextView idText;
         TextView nameText;
