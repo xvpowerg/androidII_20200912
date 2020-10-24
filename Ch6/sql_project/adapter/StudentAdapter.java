@@ -1,7 +1,9 @@
 package tw.com.xvpower.sqlite_project.adapter;
 
 import android.util.Log;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -14,16 +16,14 @@ import java.util.List;
 import tw.com.xvpower.sqlite_project.R;
 import tw.com.xvpower.sqlite_project.bean.Student;
 
-public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.MyViewHolder> {
+public class StudentAdapter extends
+        RecyclerView.Adapter<StudentAdapter.MyViewHolder>  {
     private List<Student> stList;
     private Consumer<Student> longClick;
-    private Consumer<Student> onClick;
     public StudentAdapter(List<Student> stList,
-                          Consumer<Student> longClick,
-                          Consumer<Student> onClick){
+                          Consumer<Student> longClick){
             this.stList = stList;
             this.longClick = longClick;
-            this.onClick = onClick;
     }
     @NonNull
     @Override
@@ -44,11 +44,11 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.MyViewHo
             longClick.accept(st);
             //false 只要監聽到LongClickListener之後還要監聽其他Listener
             //true 只要監聽到LongClickListener不監聽其他Listener
-            return true;
+            return false;
         });
-        holder.itemView.setOnClickListener(v->{
-                onClick.accept(st);
-        });
+//        holder.itemView.setOnClickListener(v->{
+//                onClick.accept(st);
+//        });
     }
 
     @Override
@@ -59,7 +59,7 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.MyViewHo
     public  void addStudent(Student st){
         stList.add(st);
     }
-    class MyViewHolder extends RecyclerView.ViewHolder {
+    class MyViewHolder extends RecyclerView.ViewHolder implements View.OnCreateContextMenuListener {
         TextView idText;
         TextView nameText;
         TextView scoreText;
@@ -68,8 +68,14 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.MyViewHo
             idText =  itemView.findViewById(R.id.idText);
             nameText = itemView.findViewById(R.id.nameText);
             scoreText= itemView.findViewById(R.id.scoreText);
+            itemView.setOnCreateContextMenuListener(this);
         }
-
-
+        @Override
+        public void onCreateContextMenu(ContextMenu menu, View v,
+                                        ContextMenu.ContextMenuInfo menuInfo) {
+            MenuInflater menuInflater =
+                    new MenuInflater(v.getContext());
+            menuInflater.inflate(R.menu.context_menu,menu);
+        }
     }
 }
